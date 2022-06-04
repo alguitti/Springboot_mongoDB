@@ -26,4 +26,8 @@ public class UserService {
 		return optUser.orElseThrow(() -> new ObjectNotFoundException("Id doesn't exist"));
 	}
 	
+	public User insert(User user) {
+		return rep.insert(user);
+	}
+	
 }

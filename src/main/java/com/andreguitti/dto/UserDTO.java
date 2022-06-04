@@ -19,6 +19,10 @@ public class UserDTO implements Serializable{
 		this.email = user.getEmail();
 	}
 
+	public User fromDTO() {
+		return new User(this.id, this.name, this.email);
+	}
+	
 	public String getId() {
 		return id;
 	}

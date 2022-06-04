@@ -1,5 +1,6 @@
 package com.andreguitti.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -8,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.andreguitti.domain.User;
 import com.andreguitti.dto.UserDTO;
@@ -43,6 +46,15 @@ public class UserResource {
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		UserDTO uDTO = new UserDTO(service.findById(id));
 		return ResponseEntity.ok().body(uDTO);
+	}
+	
+	//@RequestBody atribui o atributo recebido com o corpo da mensagem Json
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<User> insert (@RequestBody UserDTO objDto) {
+		User user = service.insert(objDto.fromDTO());
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(user.getId()).toUri();
+		return ResponseEntity.created(uri).body(user);
 	}
 	
 	
