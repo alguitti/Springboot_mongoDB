@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.andreguitti.dto.UserDTO;
+
 @Document (collection = "user") //diz que corresponde à uma coleção do Mongo
 public class User implements Serializable{
 	private static final long serialVersionUID = 8478407511680095749L;
@@ -21,6 +23,10 @@ public class User implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.email = email;
+	}
+	
+	public UserDTO toDTO() {
+		return new UserDTO(this.id, this.name);
 	}
 
 	public String getId() {

@@ -13,6 +13,11 @@ public class UserDTO implements Serializable{
 	
 	public UserDTO() { }
 	
+	public UserDTO(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
