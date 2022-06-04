@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,4 +62,16 @@ public class UserResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build(); //código 204 nada retorna
 	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<User> update(@RequestBody UserDTO uDTO, @PathVariable String id) {
+		User user = uDTO.fromDTO();
+		user.setId(id);
+		user = service.update(user);
+		return ResponseEntity.ok().body(user);
+		
+	}
+	
+	
+	
 }

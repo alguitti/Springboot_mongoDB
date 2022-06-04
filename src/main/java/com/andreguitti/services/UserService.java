@@ -33,4 +33,12 @@ public class UserService {
 		User user = findById(id);
 		rep.delete(user);
 	}
+	
+	public User update(User obj) {
+		User newUser = findById(obj.getId());
+		newUser.setName(obj.getName());
+		newUser.setEmail(obj.getEmail());
+		return rep.save(newUser);
+	}
+	
 }
