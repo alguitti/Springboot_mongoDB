@@ -2,10 +2,13 @@ package com.andreguitti.domain;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.andreguitti.dto.AuthorDTO;
@@ -20,6 +23,8 @@ public class Post implements Serializable{
 	private String body;
 	//os Posts possuem uma códia dos dados do usuário pois é de 1 - 1
 	private AuthorDTO author;
+	
+	private List<Comments> comments = new ArrayList<>();
 	
 	public Post() { }
 
@@ -69,6 +74,10 @@ public class Post implements Serializable{
 
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
+	}
+
+	public List<Comments> getComments() {
+		return comments;
 	}
 
 	@Override

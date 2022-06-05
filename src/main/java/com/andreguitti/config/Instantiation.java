@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.andreguitti.domain.Comments;
 import com.andreguitti.domain.Post;
 import com.andreguitti.domain.User;
 import com.andreguitti.dto.AuthorDTO;
@@ -45,10 +46,19 @@ public class Instantiation implements CommandLineRunner {
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou p SP vtnc", new AuthorDTO(maria));
 		Post post2 = new Post(null, sdf.parse("23/03/2018"), "vtnc", "vtnc", new AuthorDTO(maria));
 		
+		Comments c1 = new Comments("Boa viagem", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+		Comments c2 = new Comments("Aproveite", sdf.parse("22/03/2018"), new AuthorDTO(bob));
+		Comments c3 = new Comments("Good day", sdf.parse("23/03/2018"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().add(c3);
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 		maria.getPosts().addAll(Arrays.asList(post1, post2));
 		userRepository.save(maria);
+		
+		
 	}
 
 }
