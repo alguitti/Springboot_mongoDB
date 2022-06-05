@@ -1,5 +1,6 @@
 package com.andreguitti.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,19 @@ public class PostService {
 		return opt.orElseThrow(() -> new ObjectNotFoundException("Post could not be found"));
 	}
 	
+	//Query Methods
 	public List<Post> findByTitle(String text) {
 		return rep.findByTitleContainingIgnoreCase(text);
 	}
 	
+	//@Query query method
+	public List<Post> searchTitle(String text) {
+		return rep.searchTitle(text);
+	}
+	
+	//@Query com varios criterios
+	public List<Post> fullSearch(String text, Date min, Date max) {
+		max = new Date(max.getTime() + 24 * 60 * 60 * 1000);
+		return rep.fullSearch(text, min, max);
+	}
 }
