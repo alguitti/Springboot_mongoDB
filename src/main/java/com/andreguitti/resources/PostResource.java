@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andreguitti.domain.Post;
+import com.andreguitti.resources.exception.util.URL;
 import com.andreguitti.services.PostService;
 
 @RestController //declara que é um recurso REST
@@ -37,6 +39,15 @@ public class PostResource {
 		
 		Post post = service.findById(id);
 		return ResponseEntity.ok().body(post);
+		
+	}
+	
+	@RequestMapping(value = "/titlesearch", method = RequestMethod.GET)
+	/*  /titlesearch?title="Bom%20dia  */
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+		text = URL.decodeParam(text);
+		List<Post> posts = service.findByTitle(text);
+		return ResponseEntity.ok().body(posts);
 		
 	}
 
