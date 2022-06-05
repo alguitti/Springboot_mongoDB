@@ -18,6 +18,7 @@ public class Post implements Serializable{
 	private Date date;
 	private String title;
 	private String body;
+	//os Posts possuem uma códia dos dados do usuário pois é de 1 - 1
 	private AuthorDTO author;
 	
 	public Post() { }
