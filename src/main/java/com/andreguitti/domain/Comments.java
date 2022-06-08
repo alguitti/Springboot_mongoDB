@@ -5,14 +5,15 @@ import java.util.Date;
 
 import com.andreguitti.dto.AuthorDTO;
 
-public class Comments implements Serializable{
+public class Comments implements Serializable {
 	private static final long serialVersionUID = 283495770646772064L;
 
 	private String text;
 	private Date date;
 	private AuthorDTO author;
-	
-	public Comments() { }
+
+	public Comments() {
+	}
 
 	public Comments(String text, Date date, AuthorDTO author) {
 		this.text = text;
@@ -43,5 +44,5 @@ public class Comments implements Serializable{
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
 	}
-	
+
 }

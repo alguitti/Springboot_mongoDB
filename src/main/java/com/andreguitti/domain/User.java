@@ -11,7 +11,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.andreguitti.dto.UserDTO;
 
-@Document (collection = "user") //diz que corresponde à uma coleção do Mongo
+/**
+ * @Document (collection = "user") << para criação do documento no MongoDB
+ * @DBRef(lazy = true) << lista de referências para os posts com lazy loading
+ * 
+ * @author andre
+ *
+ */
+
+@Document (collection = "user")
 public class User implements Serializable{
 	private static final long serialVersionUID = 8478407511680095749L;
 	
@@ -19,8 +27,7 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
-	//somente referência para os ID's de posts
-	//lazy: os posts somente serão trazidos quando o usuário for acessado
+	
 	@DBRef(lazy = true)
 	private List<Post> posts = new ArrayList<>();
 	

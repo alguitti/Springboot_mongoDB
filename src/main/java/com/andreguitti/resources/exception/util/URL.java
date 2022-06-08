@@ -9,7 +9,7 @@ import java.util.TimeZone;
 
 public class URL {
 
-	//método auxiliar para decodificar o parametro de busca no padrão HTTP
+	// método auxiliar para decodificar o parametro de busca no padrão HTTP
 	public static String decodeParam(String text) {
 		try {
 			return URLDecoder.decode(text, "UTF-8");
@@ -17,7 +17,7 @@ public class URL {
 			return "";
 		}
 	}
-	
+
 	public static Date convertDate(String textDate, Date defaultValue) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));

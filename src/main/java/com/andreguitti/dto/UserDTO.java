@@ -5,8 +5,8 @@ import java.io.Serializable;
 import com.andreguitti.domain.User;
 
 public class UserDTO implements Serializable{
-
 	private static final long serialVersionUID = 824469510548918719L;
+	
 	private String id;
 	private String name;
 	private String email;

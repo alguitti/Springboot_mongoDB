@@ -7,6 +7,5 @@ import com.andreguitti.domain.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
-	//os métodos de acesso a dados já vem por herança
 		
 }

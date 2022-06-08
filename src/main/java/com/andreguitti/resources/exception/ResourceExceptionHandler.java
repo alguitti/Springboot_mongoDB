@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.andreguitti.services.exception.ObjectNotFoundException;
 
-@ControllerAdvice //tratar possíveis erros nas execuções
+//tratar possíveis erros nas execuções
+@ControllerAdvice
 public class ResourceExceptionHandler {
-	
+
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objNotFound(ObjectNotFoundException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		StandardError err = new StandardError(Instant.now(), status.value(), "Not found", e.getMessage(), request.getRequestURI());
+		StandardError err = new StandardError(Instant.now(), status.value(), "Not found", e.getMessage(),
+				request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 

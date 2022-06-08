@@ -11,7 +11,6 @@ import com.andreguitti.domain.Post;
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String>{
-	//os métodos de acesso a dados já vem por herança
 	
 	//Query Methods do Spring com MongoDB
 	List<Post> findByTitleContainingIgnoreCase(String text);

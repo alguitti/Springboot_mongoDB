@@ -15,24 +15,32 @@ import com.andreguitti.domain.Post;
 import com.andreguitti.resources.exception.util.URL;
 import com.andreguitti.services.PostService;
 
-@RestController //declara que é um recurso REST
-@RequestMapping(value="/posts") //caminho do Endpoint na 8080
+/**
+ * @RequestMapping(value="/posts") << caminho do endpoint na 8080
+ * 
+ * @author andre
+ */
+
+@RestController 
+@RequestMapping(value="/posts")
 public class PostResource {
 	
 	@Autowired
 	private PostService service;
 	
-	//ou @GetMapping
+	/**
+	 * @RequestMapping ou @GetMapping
+	 * ok() << código 200
+	 * body() << corpo da resposta
+	 * 
+	 * @author andre
+	 */
+	
 	@RequestMapping(method = RequestMethod.GET) //declara que vai ser um endpoint com metodo GET
 	public ResponseEntity<List<Post>> findAll() {
 		
-		//User obj1 = new User(null, "Maria", "maria@maria");
-		//User obj2 = new User(null, "Alex", "alex@alex");
-		
 		List<Post> list = service.findAll();
 		return ResponseEntity.ok().body(list);
-		//ok() resposta HTTP 200
-		//body() corpo da resposta
 	}
 		
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)	
@@ -54,7 +62,6 @@ public class PostResource {
 	}
 	
 	@RequestMapping(value = "/fullsearch", method = RequestMethod.GET)
-	/*  /titlesearch?title="Bom%20dia  */
 	public ResponseEntity<List<Post>> fullSearch(
 				@RequestParam(value = "text", defaultValue = "") String text,
 				@RequestParam(value = "minDate", defaultValue = "") String minDate,
