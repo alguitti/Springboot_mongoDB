@@ -36,14 +36,14 @@ public class UserResource {
 
 	}
 
-	//@Pathvariable diz que o Id da URL casa com o atributo recebido
+	// @Pathvariable diz que o Id da URL casa com o atributo recebido
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		UserDTO uDTO = new UserDTO(service.findById(id));
 		return ResponseEntity.ok().body(uDTO);
 	}
 
-	//@RequestBody atrela o atributo recebido com o corpo da mensagem Json
+	// @RequestBody atrela o atributo recebido com o corpo da mensagem Json
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<User> insert(@RequestBody UserDTO objDto) {
 		User user = service.insert(objDto.fromDTO());

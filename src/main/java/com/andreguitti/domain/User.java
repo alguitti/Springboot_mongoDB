@@ -11,6 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.andreguitti.dto.UserDTO;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * @Document (collection = "user") << para criação do documento no MongoDB
  * @DBRef(lazy = true) << lista de referências para os posts com lazy loading
@@ -20,18 +26,22 @@ import com.andreguitti.dto.UserDTO;
  */
 
 @Document (collection = "user")
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "id")
 public class User implements Serializable{
 	private static final long serialVersionUID = 8478407511680095749L;
 	
 	@Id
+	@Getter @Setter
 	private String id;
+	@Getter @Setter
 	private String name;
+	@Getter @Setter
 	private String email;
-	
 	@DBRef(lazy = true)
+	@Getter
 	private List<Post> posts = new ArrayList<>();
-	
-	public User() { }
 
 	public User(String id, String name, String email) {
 		this.id = id;
@@ -42,58 +52,5 @@ public class User implements Serializable{
 	public UserDTO toDTO() {
 		return new UserDTO(this.id, this.name);
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(id, other.id);
-	}
-	
-	
-	
 	
 }
